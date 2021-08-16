@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        {% include '_messages.html' %}
+    <div class="row align-items-center justify-content-md-center mt-5 mr-5 ml-5">
+
+        <div class="card bg-white rounded" id="box-shadow-hover">
+            <div class="card-header text-center p-3"><h2>Tabela przeanalizowanych próbek</h2></div>
+
+            <div class="card-body">
+                <div class="p-3">
+                    <div class="table-responsive">
+                        <table class="">
+                            <thead>
+                            <tr>
+                                <td>Nazwa pliku</td>
+                                <td>Data stworzenia</td>
+                                <td>Odtwarzacz</td>
+                                <td>Dlugość(sek)</td>
+                                <td>Średnia wysokość(Hz)</td>
+                                <td>Minimalna wysokość(Hz)</td>
+                                <td>Maksymalna wysokość(Hz)</td>
+                                <td>Liczba impulsów</td>
+                                <td>Liczba okresów</td>
+                                <td>Liczba załamań głosu</td>
+                                <td>Stopień załamań głosu(%)</td>
+                                <td>Drgania głosu(%)</td>
+                                <td>Migotania głosu(%)</td>
+                                <td>Autokorelacja średnia</td>
+                                <td>Średni stosunek szumów do harmonicznych</td>
+                                <td>Średni stosunek harmonicznych do szumu(dB)</td>
+                                <td>Akcje</td>
+                            </tr>
+                            </thead>
+                            {% for audio in object_list %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ audio.file }}</td>
+                                    <td>{{ audio.created_at }}</td>
+                                    <td>
+                                        <audio controls style="width:150px">
+                                            <source src="media/{{ audio.file }}" type="audio/wav">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </td>
+                                    <td>{{ audio.duration }}</td>
+                                    <td>{{ audio.mean_pitch }}</td>
+                                    <td>{{ audio.minimum_pitch }}</td>
+                                    <td>{{ audio.maximum_pitch }}</td>
+                                    <td>{{ audio.number_of_pulses }}</td>
+                                    <td>{{ audio.number_of_periods }}</td>
+                                    <td>{{ audio.number_of_voice_breaks }}</td>
+                                    <td>{{ audio.degree_of_voice_breaks }}</td>
+                                    <td>{{ audio.jitter }}</td>
+                                    <td>{{ audio.shimmer }}</td>
+                                    <td>{{ audio.mean_autocorrelation }}</td>
+                                    <td>{{ audio.mean_noise_th_ratio }}</td>
+                                    <td>{{ audio.mean_harmonics_tr_ratio }}</td>
+                                    <td>
+                                        <a href="media/{{ audio.file }}" download="{{ audio.file }}">Pobierz</a>
+                                        <a href="{% url 'audio_delete' audio.id %}">Usuń</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

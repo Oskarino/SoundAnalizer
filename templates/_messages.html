@@ -1,0 +1,25 @@
+{#{% if messages %}#}
+{#<ul class="messages">#}
+{#    {% for message in messages %}#}
+{#    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{#{% endif %}#}
+{% block scripts %}
+    <script text="javascript">
+            setTimeout(function () {
+                $('.messages').fadeOut('fast');
+            }, 3000);
+        </script>
+{% endblock %}
+
+<div style="position: absolute; width:98%; z-index: 1; opacity: 0.9;" class="mt-2">
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }} messages shadow p-3 bg-body rounded" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+</div>
+

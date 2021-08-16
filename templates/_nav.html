@@ -1,0 +1,42 @@
+{#<nav class="navbar">#}
+
+{% load static %}
+
+<div class="row">
+    <ul class="col-12 nav navbar navbar-light justify-content-end" style="background-color: #e3f2fd;">
+    <img src="{% static 'voice.png' %}" height="30px" width="30px">
+    <a class="navbar-brand align-self-start" href="#">Sound Analizer</a>
+    <span class="flex-grow-1"></span>
+    {% if user.is_anonymous %}
+      <li class="nav-item">
+{#          <a class="nav-link" href="{% url 'logout' %}">Wyloguj</a>#}
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Witaj użytkowniku!</a>
+      </li>
+        |
+      <li class="nav-item">
+        {% if request.path == '/rejestracja' %}
+            <a class="nav-link" href="{% url 'login' %}">Zaloguj</a>
+        {% elif request.path == '/logowanie' %}
+            <a class="nav-link" href="{% url 'registration' %}">Rejestracja</a>
+        {% endif %}
+      </li>
+    {% else %}
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Witaj <b>{{user.first_name}} {{user.last_name}}</b>!</a>
+      </li>
+      |
+      <li class="nav-item">
+        {% if request.path == '/lista' %}
+            <a class="nav-link" href="{% url 'index' %}">Nagrywanie próbki</a>
+        {% elif request.path == '/' %}
+            <a class="nav-link" href="{% url 'audio_listing' %}">Panel Użytkownika</a>
+        {% endif %}
+      </li>
+      |
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Wyloguj</a>
+      </li>
+    {% endif %}
+  </ul>
+</div>
+{#</nav>#}

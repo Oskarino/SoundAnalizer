@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+        {% include '_messages.html' %}
+    <div class="row align-items-center justify-content-md-center mt-5">
+        <div class="card mb-5 bg-white rounded" id="box-shadow-hover">
+            <div class="card-header text-center p-3">
+                <h2>Logowanie</h2>
+            </div>
+            <div class="p-3">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="text-center">
+                            <button class="btn btn-primary">Zaloguj</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

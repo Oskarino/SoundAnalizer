@@ -1,0 +1,5 @@
+#!/bin/sh
+./manage.py migrate --noinput
+mkdir -p media
+mkdir -p staticroot
+./manage.py collectstatic --noinput

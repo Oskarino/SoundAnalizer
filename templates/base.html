@@ -1,0 +1,26 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <title>Sound Analizer</title>
+    {% block styles %}
+        {% bootstrap_css %}
+        {{ block.super }}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% endblock %}
+</head>
+<body class="bg-light">
+<div class="container-fluid">
+    {% include '_nav.html' %}
+
+    {% block content %}{% endblock %}
+    {% block scripts %}
+        <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    {% endblock %}
+</div>
+</body>
+</html>

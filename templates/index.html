@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        var CSRF_TOKEN = '{{ token }}';
+        var SUCCESS_URL = '{% url 'audio_listing' %}';
+    </script>
+    <script src="{% static 'js/app.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% include '_messages.html' %}
+    <div class="mt-2" id="message"></div>
+    <div class="row align-items-center justify-content-md-center mt-5">
+        <div class="card mb-5 bg-white rounded" id="box-shadow-hover">
+            <div class="card-header text-center p-3"><h2>Rejestracja głosu</h2></div>
+            <div class="card-body">
+                <p>
+                    <b>{{ user.first_name }}</b>
+                    <span>nagraj swoją próbkę głosu, po przesłaniu wyświetlą się przeanalizowane dane.</span>
+                </p>
+                <br>
+
+                <div class="text-center">
+                    <button class="btn btn-danger" id="recordButton">Nagraj</button>
+                    <button class="btn btn-secondary" id="playButton">Odtworz</button>
+                    <button class="btn btn-primary" id="uploadButton" data-upload-url="{% url 'upload_audio' %}">
+                        Wyślij
+                    </button>
+
+                </div>
+                <div class="text-center float-container" >
+                    <div class="float-child"><button id="recAnimation" disabled></button></div>
+                    <div class="float-child" id="recText" style="width: 90%">Trwa nagrywanie</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
